@@ -1,0 +1,2 @@
+# LSP_BorderCannonConfig
+LSP服务器边境珍珠炮配置程序
