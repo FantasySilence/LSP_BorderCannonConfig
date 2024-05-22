@@ -21,7 +21,7 @@ t = int(input('输入您希望珍珠飞行的时间\n'))
 print('开始生成珍珠配置文件...')
 TNT_solution = CalculateTNTNumber(x, y, z, t).TNT_num
 
-# TODO：方向配置直接输出二进制码?
+# TODO：后续需要对这个项目制作UI
 df = pd.DataFrame(
     TNT_solution, 
     columns=[
