@@ -9,6 +9,7 @@
 import pandas as pd
 from src.common.filesio import FilesIO
 from src.modules.calTNTnum import CalculateTNTNumber
+from src.modules.infotransform import ConfigInfoTransform
 
 
 # ------ 用户期待的珍珠落点与飞行时间 ------ #
@@ -29,7 +30,16 @@ df = pd.DataFrame(
     ]
 )
 df.to_csv(
-    FilesIO.getConfigSavePath('LSP_BorderCannonConfig_SE.csv'), 
+    FilesIO.getConfigSavePath('LSP_BorderCannonConfig_NE.csv'), 
     index=False, encoding="utf-8"
 )
 print('珍珠配置文件生成完毕！')
+
+flag = input("是否翻译配置信息(Y/N): ")
+if flag.lower() == "y":
+    tnt_1 = int(input("输入第一个TNT落点的当量: \n"))
+    tnt_2 = int(input("输入第二个TNT落点的当量: \n"))
+    tnt_3 = int(input("输入第三个TNT落点的当量: \n"))
+    ConfigInfoTransform(tnt_1, tnt_2, tnt_3)
+else:
+    pass
