@@ -30,7 +30,7 @@ class CalculateTNTNumber:
         self.TNT_num = self.__cal__()
     
 
-    def __cal__(self) -> list[list[float, str]]:
+    def __cal__(self) -> list[list[int, str]]:
 
         """
         计算TNT当量
@@ -54,7 +54,7 @@ class CalculateTNTNumber:
             tntSolve = np.vstack((self.TNT_motion, np.array([px, py, pz]))).T
             tntSolution = np.linalg.solve(tntSolve[:, :-1], tntSolve[:, -1])
             # TNT数量取整
-            final_solution: list = tntSolution.astype(int).tolist()
+            final_solution = list(map(lambda x: round(x), tntSolution))
 
             # ------ 计算实际的TNT动量用于测试与校准 ------ #
             real_px = np.sum(
