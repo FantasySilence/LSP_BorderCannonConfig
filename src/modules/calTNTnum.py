@@ -7,6 +7,7 @@
 # @Description: 计算TNT的当量                     #
 # ============================================== #
 import numpy as np
+from src.common.const import DIRECTION_ROTATION
 from src.common.const import DIRECTION_CODE_TABLE
 from src.modules.loadTNTmotion import LoadOneTNTMotion
 
@@ -37,9 +38,9 @@ class CalculateTNTNumber:
         """
 
         # ------ 初始位置 ------ #
-        x0 = 10000.0625
+        x0 = DIRECTION_ROTATION["X"]
         y0 = 178.34722638929412
-        z0 = 9999.9375
+        z0 = DIRECTION_ROTATION["Z"]
 
         solution_list = []
         for tick in range(self.t, self.t + 100):
