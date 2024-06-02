@@ -7,6 +7,7 @@
 # @Description: 翻译信息，便于玩家配置               #
 # ================================================ #
 import numpy as np
+from src.common.const import DIRECTION_CODE_TABLE
 
 
 class ConfigInfoTransform:
@@ -16,14 +17,17 @@ class ConfigInfoTransform:
     方便玩家配置边境炮
     """
 
-    def __init__(self, tnt_1: int, tnt_2: int, tnt_3: int) -> None:
+    def __init__(
+            self, tnt_1: str, tnt_2: str, tnt_3: str, direction: str
+    ) -> None:
         
         """
         tnt_1, tnt_2, tnt_3: 分别为第一个第二个第三个TNT的当量
         例如第一个TNT：2113，第二个TNT：60128，第三个TNT：166
         """
 
-        self.TNT_num = np.array([tnt_1, tnt_2, tnt_3])
+        self.direction = direction
+        self.TNT_num = np.array([int(tnt_1), int(tnt_2), int(tnt_3)])
         # ------ 二进制基础数 ------ #
         self.bin_unit = np.array([16, 8, 4, 2, 1])
         # ------ 数量单位 ------ #
@@ -42,10 +46,10 @@ class ConfigInfoTransform:
         self.times_1 = (self.TNT_num // 780) % 1000 % 100 % 10
 
         # ------ 格式化输出结果 ------ #
-        self.getResult()
+        self.res_strings = self.getResult()
     
 
-    def getResult(self) -> None:
+    def getResult(self) -> str:
 
         """
         格式化输出结果
@@ -57,13 +61,15 @@ class ConfigInfoTransform:
         times_dict = self.__getRestofTNTinfo__(
             num_unit=self.times_unit, rest="self.times_", n=4
         )
-        print("3个TNT对应的配置信息为：")
+        res_strings = """3个TNT对应的配置信息为：\n"""
         for key in tnt_dict:
-            print("-" * 50)
-            print("%s的配置信息：" % key[:-2])
-            print("大头(以780满当量蓄力的次数)：", times_dict[key])
-            print("小头(满当量蓄力后剩余的TNT)：", tnt_dict[key])
-        print("-" * 50)
+            res_strings += "-" * 50 + "\n"
+            res_strings += "%s的配置信息：\n" % key[:-2]
+            res_strings += "大头(以780满当量蓄力的次数)：%s\n" % times_dict[key]
+            res_strings += "小头(满当量蓄力后剩余的TNT)：%s\n" % tnt_dict[key]
+        res_strings += "-" * 50 + "\n"
+        res_strings += "边境炮方向：%s" % DIRECTION_CODE_TABLE[self.direction]
+        return res_strings
 
 
     def __getRestofTNTinfo__(self, num_unit: list, rest: str, n: int) -> dict[str, str]:
