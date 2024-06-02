@@ -23,3 +23,12 @@ class FilesIO:
         resources_path = os.path.join(ROOTPATH, 'resources')
         config_path = os.path.join(resources_path, filename)
         return config_path
+
+    @staticmethod
+    def getFigPath(figname: str) -> str:
+
+        src_path = os.path.dirname(os.path.dirname(__file__))
+        ROOTPATH = os.path.dirname(src_path)
+        images_path = os.path.join(ROOTPATH, 'images')
+        fig_path = os.path.join(images_path, figname)
+        return fig_path
