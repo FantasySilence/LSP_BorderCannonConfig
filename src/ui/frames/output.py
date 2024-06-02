@@ -25,6 +25,7 @@ class ResultTreeViewFrame(ttk.Frame):
         self.res_frame.columnconfigure(0, weight=1)
         self.res_frame.pack(fill=BOTH, expand=YES)
         self.details_frame = None
+        self.scrollbar = None
         self.create_treeview()
     
 
@@ -68,11 +69,14 @@ class ResultTreeViewFrame(ttk.Frame):
             )
         
         # ------ 数据量可能较大，设置一个滚动条 ------ #
-        scrollbar = ttk.Scrollbar(
-            self.treeview, orient="vertical", command=self.treeview.yview
-        )
-        scrollbar.pack(side='right', fill='y')
-        self.treeview.configure(yscrollcommand=scrollbar.set)
+        if self.scrollbar:
+            pass
+        else:
+            self.scrollbar = ttk.Scrollbar(
+                self.treeview, orient="vertical", command=self.treeview.yview
+            )
+            self.scrollbar.pack(side='right', fill='y')
+            self.treeview.configure(yscrollcommand=self.scrollbar.set)
     
 
     def on_item_selected(self, event) -> None:
@@ -91,8 +95,14 @@ class ResultTreeViewFrame(ttk.Frame):
         item_values = self.treeview.item(selected_item, 'values')
         
         # ------ 创建新的小窗口用于显示 ------ #
+        # 获取主窗口的位置
+        x, y = self.res_frame.winfo_rootx(), self.res_frame.winfo_rooty()
+        # 获取主窗口的大小(宽度)
+        width = self.res_frame.winfo_width()
         self.details_frame = ttk.Toplevel(self.res_frame)
         self.details_frame.title("详细信息")
+        # 详细信息窗口将固定显示在主窗口的右侧
+        self.details_frame.geometry(f"+{x + width + 10}+{y}")
         text_area = ttk.ScrolledText(self.details_frame, width=60, height=20)
         text_area.pack(padx=10, pady=10)
 
