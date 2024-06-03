@@ -10,11 +10,12 @@ import ttkbootstrap as ttk
 from tkinter.font import Font
 from ttkbootstrap.constants import *
 from src.modules.calTNTnum import CalculateTNTNumber
+from src.ui.frames.output import ResultTreeViewFrame
 
 
 class InputFrame(ttk.Frame):
 
-    def __init__(self, master, res_page):
+    def __init__(self, master, res_page: ResultTreeViewFrame):
         
         # ------ 创建输入窗口的根容器 ------ #
         super().__init__(master)
