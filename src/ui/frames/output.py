@@ -54,6 +54,9 @@ class ResultTreeViewFrame(ttk.Frame):
         与用户输入进行通信，实现结果互通
         """
 
+        # ------ 清除Treeview中的旧数据 ------ #
+        self.treeview.delete(*self.treeview.get_children())
+
         # ------ 从配置结果中获取信息 ------ #
         output_dataframe = config[
             ["第一个点tnt", "第二个点tnt", "第三个点tnt", "方向"]
