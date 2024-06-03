@@ -11,6 +11,7 @@ from tkinter.font import Font
 from ttkbootstrap.constants import *
 from src.modules.calTNTnum import CalculateTNTNumber
 from src.ui.frames.output import ResultTreeViewFrame
+from src.common.input_validation import validate_number
 
 
 class InputFrame(ttk.Frame):
@@ -35,6 +36,7 @@ class InputFrame(ttk.Frame):
         self.input_frame = ttk.Labelframe(
             self, text=text, padding=(0, 5)
         )
+        self.validation_func = self.input_frame.register(validate_number)
         self.input_frame.columnconfigure(0, weight=1)
         self.input_frame.pack(fill=BOTH, expand=YES)
         self.create_page()
@@ -90,7 +92,8 @@ class InputFrame(ttk.Frame):
         )
         x_label.grid(row=0, column=0, padx=5, pady=5, sticky=W)
         x_input = ttk.Entry(
-            master=self.input_frame, textvariable=self.x0_input, width=10
+            master=self.input_frame, textvariable=self.x0_input, width=10,
+            validate="focus", validatecommand=(self.validation_func, '%P')
         )
         x_input.grid(row=1, column=0, padx=5, pady=5, sticky=EW)
         # 输入珍珠y坐标
@@ -102,7 +105,8 @@ class InputFrame(ttk.Frame):
         )
         y_label.grid(row=2, column=0, padx=5, pady=5, sticky=W)
         y_input = ttk.Entry(
-            master=self.input_frame, textvariable=self.y0_input, width=10
+            master=self.input_frame, textvariable=self.y0_input, width=10,
+            validate="focus", validatecommand=(self.validation_func, '%P')
         )
         y_input.grid(row=3, column=0, padx=5, pady=5, sticky=EW)
         # 输入珍珠z坐标
@@ -114,7 +118,8 @@ class InputFrame(ttk.Frame):
         )
         z_label.grid(row=4, column=0, padx=5, pady=5, sticky=W)
         z_input = ttk.Entry(
-            master=self.input_frame, textvariable=self.z0_input, width=10
+            master=self.input_frame, textvariable=self.z0_input, width=10,
+            validate="focus", validatecommand=(self.validation_func, '%P')
         )
         z_input.grid(row=5, column=0, padx=5, pady=5, sticky=EW)
 
@@ -130,7 +135,8 @@ class InputFrame(ttk.Frame):
         )
         x_label.grid(row=6, column=0, padx=5, pady=5, sticky=W)
         x_input = ttk.Entry(
-            master=self.input_frame, textvariable=self.x_input, width=10
+            master=self.input_frame, textvariable=self.x_input, width=10,
+            validate="focus", validatecommand=(self.validation_func, '%P')
         )
         x_input.grid(row=7, column=0, padx=5, pady=5, sticky=EW)
         # 输入目标y坐标
@@ -142,7 +148,8 @@ class InputFrame(ttk.Frame):
         )
         y_label.grid(row=8, column=0, padx=5, pady=5, sticky=W)
         y_input = ttk.Entry(
-            master=self.input_frame, textvariable=self.y_input, width=10
+            master=self.input_frame, textvariable=self.y_input, width=10,
+            validate="focus", validatecommand=(self.validation_func, '%P')
         )
         y_input.grid(row=9, column=0, padx=5, pady=5, sticky=EW)
         # 输入目标z坐标
@@ -154,7 +161,8 @@ class InputFrame(ttk.Frame):
         )
         z_label.grid(row=10, column=0, padx=5, pady=5, sticky=W)
         z_input = ttk.Entry(
-            master=self.input_frame, textvariable=self.z_input, width=10
+            master=self.input_frame, textvariable=self.z_input, width=10,
+            validate="focus", validatecommand=(self.validation_func, '%P')
         )
         z_input.grid(row=11, column=0, padx=5, pady=5, sticky=EW)
 
