@@ -70,7 +70,7 @@ class MainFrame(ttk.Frame):
     
     @staticmethod
     def _show() -> None:
-        root = ttk.Window(title="LSP_BorderConfig v1.0", size=(1000, 730))
+        root = ttk.Window(title="LSP_BorderConfig v1.1", size=(1000, 730))
         MainFrame(root)
         root.mainloop()
 
