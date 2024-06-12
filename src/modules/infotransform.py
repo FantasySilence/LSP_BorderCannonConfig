@@ -71,8 +71,8 @@ class ConfigInfoTransform:
         for key in tnt_dict:
             res_strings += "-" * 50 + "\n"
             res_strings += "%s的配置信息：\n" % key[:-2]
-            res_strings += "大头(以780满当量蓄力的次数)：%s\n" % times_dict[key]
             res_strings += "小头(满当量蓄力后剩余的TNT)：%s\n" % tnt_dict[key]
+            res_strings += "大头(以780满当量蓄力的次数)：%s\n" % times_dict[key]
         res_strings += "-" * 50 + "\n"
         res_strings += "边境炮方向：%s\n" % DIRECTION_CODE_TABLE[self.direction]
         res_strings += "-" * 50 + "\n"
