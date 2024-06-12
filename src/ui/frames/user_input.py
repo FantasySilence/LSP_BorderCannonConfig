@@ -20,13 +20,13 @@ class InputFrame(ttk.Frame):
         
         # ------ 创建输入窗口的根容器 ------ #
         super().__init__(master)
-        self.x0_input = ttk.StringVar(value="0")
-        self.y0_input = ttk.StringVar(value="178.34722638929412")
-        self.z0_input = ttk.StringVar(value="0")
+        self.x0_input = ttk.StringVar(value="9996.24")
+        self.y0_input = ttk.StringVar(value="256")
+        self.z0_input = ttk.StringVar(value="9999.24")
         self.x_input = ttk.StringVar(value="0")
-        self.y_input = ttk.StringVar(value="0")
+        self.y_input = ttk.StringVar(value="128")
         self.z_input = ttk.StringVar(value="0")
-        self.intended_time = ttk.StringVar(value="0")
+        self.intended_time = ttk.StringVar(value="1200")
 
         # ------ 与结果显示页面建立通信 ------ #
         self.res_output_frame = res_page

@@ -7,6 +7,7 @@
 # @Description: 翻译信息，便于玩家配置               #
 # ================================================ #
 import numpy as np
+import pandas as pd
 from src.common.const import DIRECTION_CODE_TABLE
 
 
@@ -18,7 +19,8 @@ class ConfigInfoTransform:
     """
 
     def __init__(
-            self, tnt_1: str, tnt_2: str, tnt_3: str, direction: str
+            self, tnt_1: str, tnt_2: str, tnt_3: str, direction: str,
+            res_dataframe: pd.DataFrame, index: int
     ) -> None:
         
         """
@@ -45,6 +47,10 @@ class ConfigInfoTransform:
         self.times_10 = (self.TNT_num // 780) % 1000 % 100 // 10
         self.times_1 = (self.TNT_num // 780) % 1000 % 100 % 10
 
+        # ------ 动量 ------ #
+        self.res_dataframe = res_dataframe
+        self.index = index
+
         # ------ 格式化输出结果 ------ #
         self.res_strings = self.getResult()
     
@@ -68,7 +74,11 @@ class ConfigInfoTransform:
             res_strings += "大头(以780满当量蓄力的次数)：%s\n" % times_dict[key]
             res_strings += "小头(满当量蓄力后剩余的TNT)：%s\n" % tnt_dict[key]
         res_strings += "-" * 50 + "\n"
-        res_strings += "边境炮方向：%s" % DIRECTION_CODE_TABLE[self.direction]
+        res_strings += "边境炮方向：%s\n" % DIRECTION_CODE_TABLE[self.direction]
+        res_strings += "-" * 50 + "\n"
+        res_strings += "x动量：%.6f\n" % self.res_dataframe["x动量"].iloc[self.index]
+        res_strings += "y动量：%.6f\n" % self.res_dataframe["y动量"].iloc[self.index]
+        res_strings += "z动量：%.6f\n" % self.res_dataframe["z动量"].iloc[self.index]
         return res_strings
 
 

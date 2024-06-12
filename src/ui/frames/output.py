@@ -58,12 +58,13 @@ class ResultTreeViewFrame(ttk.Frame):
         self.treeview.delete(*self.treeview.get_children())
 
         # ------ 从配置结果中获取信息 ------ #
-        output_dataframe = config[
-            ["第一个点tnt", "第二个点tnt", "第三个点tnt", "方向"]
-        ]
+        self.output_dataframe = config[[
+            '第一个点tnt','第二个点tnt','第三个点tnt', 
+            'x动量','y动量','z动量', '方向'
+        ]]
 
         # ------ 将配置信息插入进先前创建的Treeview ------ #
-        for _, row in output_dataframe.iterrows():
+        for _, row in self.output_dataframe.iterrows():
             self.treeview.insert(
                 "", "end", values=(
                     row["第一个点tnt"], row["第二个点tnt"],
@@ -96,6 +97,9 @@ class ResultTreeViewFrame(ttk.Frame):
         selected_item = self.treeview.focus()
         # 获取该行的值
         item_values = self.treeview.item(selected_item, 'values')
+        # 获取选中行的索引
+        item_id = self.treeview.selection()[0]
+        item_index = self.treeview.index(item_id)
         
         # ------ 创建新的小窗口用于显示 ------ #
         # 获取主窗口的位置
@@ -110,6 +114,8 @@ class ResultTreeViewFrame(ttk.Frame):
         text_area.pack(padx=10, pady=10)
 
         # ------ 插入信息并设置禁止修改 ------ #
-        res = ConfigInfoTransform(*item_values).res_strings
+        res = ConfigInfoTransform(
+            *item_values, self.output_dataframe, item_index
+        ).res_strings
         text_area.insert(END, res)
         text_area.configure(state='disabled')
