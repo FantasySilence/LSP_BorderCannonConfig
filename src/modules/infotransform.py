@@ -9,6 +9,7 @@
 import numpy as np
 import pandas as pd
 from src.common.const import DIRECTION_CODE_TABLE
+from src.modules.landingprediction import LandingPointPrediction
 
 
 class ConfigInfoTransform:
@@ -67,6 +68,11 @@ class ConfigInfoTransform:
         times_dict = self.__getRestofTNTinfo__(
             num_unit=self.times_unit, rest="self.times_", n=4
         )
+        landing_info = LandingPointPrediction.generate(
+            x_motion=self.res_dataframe["x动量"].iloc[self.index],
+            y_motion=self.res_dataframe["y动量"].iloc[self.index],
+            z_motion=self.res_dataframe["z动量"].iloc[self.index]
+        )
         res_strings = """3个TNT对应的配置信息为：\n"""
         for key in tnt_dict:
             res_strings += "-" * 50 + "\n"
@@ -79,6 +85,9 @@ class ConfigInfoTransform:
         res_strings += "x动量：%.6f\n" % self.res_dataframe["x动量"].iloc[self.index]
         res_strings += "y动量：%.6f\n" % self.res_dataframe["y动量"].iloc[self.index]
         res_strings += "z动量：%.6f\n" % self.res_dataframe["z动量"].iloc[self.index]
+        res_strings += "-" * 50 + "\n"
+        res_strings += "珍珠预计落点x坐标：%f\n" % landing_info["x坐标"].iloc[-1]
+        res_strings += "珍珠预计落点z坐标：%f\n" % landing_info["z坐标"].iloc[-1]
         return res_strings
 
 

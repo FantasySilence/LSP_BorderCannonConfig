@@ -111,7 +111,7 @@ class ResultTreeViewFrame(ttk.Frame):
         self.details_frame.title("详细信息")
         # 详细信息窗口将固定显示在主窗口的右侧
         self.details_frame.geometry(f"+{x + width + 10}+{y}")
-        text_area = ttk.ScrolledText(self.details_frame, width=60, height=20)
+        text_area = ttk.ScrolledText(self.details_frame, width=60, height=22)
         text_area.pack(padx=10, pady=10)
 
         # ------ 插入信息并设置禁止修改 ------ #
