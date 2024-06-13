@@ -1,0 +1,9 @@
+{
+    "default_x_init": "9996.24",
+    "default_y_init": "256",
+    "default_z_init": "9999.24",
+    "default_x_target": "0",
+    "default_y_target": "128",
+    "default_z_target": "0",
+    "default_flying_time": "1200"
+}
