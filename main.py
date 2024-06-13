@@ -8,6 +8,4 @@
 # ========================================================================== #
 from src.ui.mainFrame import MainFrame
 
-# TODO: 修复bug...
-# FIXME: UI界面在使用时,界面内窗口的尺寸会发生变化
 MainFrame.show()
