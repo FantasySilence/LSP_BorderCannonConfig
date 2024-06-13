@@ -6,9 +6,11 @@
 # =================================== #
 # @Description: 用户输入界面           #
 # =================================== #
+import json
 import ttkbootstrap as ttk
 from tkinter.font import Font
 from ttkbootstrap.constants import *
+from src.common.filesio import FilesIO
 from src.modules.calTNTnum import CalculateTNTNumber
 from src.ui.frames.output import ResultTreeViewFrame
 from src.common.input_validation import validate_number
@@ -16,28 +18,35 @@ from src.common.input_validation import validate_number
 
 class InputFrame(ttk.Frame):
 
-    def __init__(self, master, res_page: ResultTreeViewFrame):
+    def __init__(self, master, res_page: ResultTreeViewFrame, *args, **kwargs):
+
+        # ------ 读取设置文件中的默认设置 ------ #
+        with open(FilesIO.getConfigSavePath("settings/settings.json"), "r") as f:
+            default_settings = json.load(f)
         
         # ------ 创建输入窗口的根容器 ------ #
-        super().__init__(master)
-        self.x0_input = ttk.StringVar(value="9996.24")
-        self.y0_input = ttk.StringVar(value="256")
-        self.z0_input = ttk.StringVar(value="9999.24")
-        self.x_input = ttk.StringVar(value="0")
-        self.y_input = ttk.StringVar(value="128")
-        self.z_input = ttk.StringVar(value="0")
-        self.intended_time = ttk.StringVar(value="1200")
+        super().__init__(master, *args, **kwargs)
+        self.x0_input = ttk.StringVar(value=default_settings["default_x_init"])
+        self.y0_input = ttk.StringVar(value=default_settings["default_y_init"])
+        self.z0_input = ttk.StringVar(value=default_settings["default_z_init"])
+        self.x_input = ttk.StringVar(value=default_settings["default_x_target"])
+        self.y_input = ttk.StringVar(value=default_settings["default_y_target"])
+        self.z_input = ttk.StringVar(value=default_settings["default_z_target"])
+        self.intended_time = ttk.StringVar(value=default_settings["default_flying_time"])
 
         # ------ 与结果显示页面建立通信 ------ #
         self.res_output_frame = res_page
 
         # ------ 设置标签页面容器，存放交互逻辑 ------ #
+        self.pack_propagate(False)
+        self.grid_propagate(False)
         text = "输入珍珠的坐标与预期飞行时间"
         self.input_frame = ttk.Labelframe(
-            self, text=text, padding=(0, 5)
+            self, text=text, padding=(0, 5), width=300
         )
         self.validation_func = self.input_frame.register(validate_number)
         self.input_frame.columnconfigure(0, weight=1)
+        self.input_frame.grid_propagate(False)
         self.input_frame.pack(fill=BOTH, expand=YES)
         self.create_page()
     

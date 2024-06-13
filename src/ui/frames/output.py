@@ -14,15 +14,16 @@ from src.modules.infotransform import ConfigInfoTransform
 
 class ResultTreeViewFrame(ttk.Frame):
 
-    def __init__(self, master) -> None:
+    def __init__(self, master, *args, **kwargs) -> None:
 
-        super().__init__(master)
+        super().__init__(master, *args, **kwargs)
         # ------ 设置标签页面容器，存放交互逻辑 ------ #
         text = "配置信息结果输出"
         self.res_frame = ttk.Labelframe(
-            self, text=text, padding=(0, 5)
+            self, text=text, padding=(0, 5), width=700
         )
         self.res_frame.columnconfigure(0, weight=1)
+        self.res_frame.pack_propagate(False)
         self.res_frame.pack(fill=BOTH, expand=YES)
         self.details_frame = None
         self.scrollbar = None
