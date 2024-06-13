@@ -8,5 +8,4 @@
 # ========================================================================== #
 from src.ui.mainFrame import MainFrame
 
-# TODO：计划增加珍珠落点预测
 MainFrame.show()
