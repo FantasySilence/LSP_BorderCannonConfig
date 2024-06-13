@@ -135,7 +135,7 @@ class SettingsFrame(ttk.Frame):
         # ------ 输入预期到达时间 ------ #
         intended_time_label = ttk.Label(
             master=self.frame,
-            text="输入预期到达时间:",
+            text="输入默认预期到达时间:",
             font=Font(family="宋体", size=10),
             bootstyle=(INVERSE, LIGHT)
         )

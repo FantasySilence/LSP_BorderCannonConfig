@@ -66,17 +66,17 @@ class MainFrame(ttk.Frame):
         settings_button.pack(side=RIGHT, padx=5, ipadx=10, ipady=8)
 
         # ------ 创建存放用户输入与结果显示的容器 ------ #
-        main_frame = ttk.Frame(self, bootstyle=LIGHT)
-        main_frame.columnconfigure(0, weight=1)
-        main_frame.columnconfigure(1, weight=3)
-        main_frame.rowconfigure(0, weight=1)
-        main_frame.grid_propagate(False)
-        main_frame.pack(side=TOP, fill=BOTH, expand=YES)
+        self.main_frame = ttk.Frame(self, bootstyle=LIGHT)
+        self.main_frame.columnconfigure(0, weight=1)
+        self.main_frame.columnconfigure(1, weight=3)
+        self.main_frame.rowconfigure(0, weight=1)
+        self.main_frame.grid_propagate(False)
+        self.main_frame.pack(side=TOP, fill=BOTH, expand=YES)
         # 向主容器中添加结果显示子容器
-        result_frame = ResultTreeViewFrame(main_frame, width=700)
+        result_frame = ResultTreeViewFrame(self.main_frame, width=700)
         result_frame.grid(row=0, column=1, sticky=NSEW)
         # 向主容器中添加用户输入子容器
-        input_frame = InputFrame(main_frame, result_frame, width=300)
+        input_frame = InputFrame(self.main_frame, result_frame, width=300)
         input_frame.grid(row=0, column=0, sticky=NSEW)
     
     def _func_settings(self) -> None:
@@ -90,12 +90,12 @@ class MainFrame(ttk.Frame):
             self.settings_window.destroy()
 
         # ------ 创建弹窗 ------ #
-        self.settings_window = ttk.Toplevel(self)
+        self.settings_window = ttk.Toplevel(self.main_frame)
         self.settings_window.title("设置")
         
-        # ------ 显示在主窗口的中心位置 ------ #
-        x = self.winfo_x() + self.winfo_width() // 2
-        y = self.winfo_y() + self.winfo_height() // 2
+        # ------ 显示在主窗口的靠中心位置 ------ #
+        x = self.main_frame.winfo_rootx() + self.main_frame.winfo_width() // 2
+        y = self.main_frame.winfo_rooty()
         self.settings_window.geometry(f"+{x}+{y}")
 
         # ------ 创建页面 ------ #
@@ -105,7 +105,7 @@ class MainFrame(ttk.Frame):
     
     @staticmethod
     def _show() -> None:
-        root = ttk.Window(title="LSP_BorderConfig v1.2", size=(1000, 730))
+        root = ttk.Window(title="LSP_BorderConfig v1.3", size=(1000, 730))
         root.resizable(False, False)
         MainFrame(root)
         root.mainloop()
