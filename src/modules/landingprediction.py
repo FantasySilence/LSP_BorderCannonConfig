@@ -8,7 +8,7 @@
 # =============================================== #
 import json
 import pandas as pd
-from src.common.path_utils import resource_path
+from src.common.path_utils import *
 
 
 class LandingPointPrediction:
@@ -27,8 +27,7 @@ class LandingPointPrediction:
         """
         
         # ------ 读取默认设置，获取珍珠初始位置 ------ #
-        with open(resource_path("resources/settings/settings.json"), "r") as f:
-            settings = json.load(f)
+        settings = load_settings()
         
         # ------ 珍珠初始位置 ------ #
         x = x_init = float(settings["default_x_init"])

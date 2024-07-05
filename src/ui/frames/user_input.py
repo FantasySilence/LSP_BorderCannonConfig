@@ -10,7 +10,7 @@ import json
 import ttkbootstrap as ttk
 from tkinter.font import Font
 from ttkbootstrap.constants import *
-from src.common.path_utils import resource_path
+from src.common.path_utils import *
 from src.modules.calTNTnum import CalculateTNTNumber
 from src.ui.frames.output import ResultTreeViewFrame
 from src.common.input_validation import validate_number
@@ -21,8 +21,7 @@ class InputFrame(ttk.Frame):
     def __init__(self, master, res_page: ResultTreeViewFrame, *args, **kwargs):
 
         # ------ 读取设置文件中的默认设置 ------ #
-        with open(resource_path("resources/settings/settings.json"), "r") as f:
-            default_settings = json.load(f)
+        default_settings = load_settings()
         
         # ------ 创建输入窗口的根容器 ------ #
         super().__init__(master, *args, **kwargs)
