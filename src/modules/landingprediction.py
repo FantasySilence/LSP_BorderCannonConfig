@@ -8,7 +8,6 @@
 # =============================================== #
 import json
 import pandas as pd
-from src.common.filesio import FilesIO
 
 
 class LandingPointPrediction:
@@ -27,7 +26,7 @@ class LandingPointPrediction:
         """
         
         # ------ 读取默认设置，获取珍珠初始位置 ------ #
-        with open(FilesIO.getConfigSavePath("settings/settings.json"), "r") as f:
+        with open("resources/settings/settings.json", "r") as f:
             settings = json.load(f)
         
         # ------ 珍珠初始位置 ------ #
