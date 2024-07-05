@@ -8,7 +8,6 @@
 # =================================== #
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
-from src.common.filesio import FilesIO
 from src.ui.frames.user_input import InputFrame
 from src.ui.frames.settings import SettingsFrame
 from src.ui.frames.output import ResultTreeViewFrame
@@ -35,7 +34,7 @@ class MainFrame(ttk.Frame):
         # ------ 加载图片 ------ #
         self.images = [
             ttk.PhotoImage(
-                name="logo", file=FilesIO.getFigPath("Ender_Pearl.png")
+                name="logo", file="images/Ender_Pearl.png"
             ),
         ]
 
