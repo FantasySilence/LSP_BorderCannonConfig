@@ -12,7 +12,6 @@ import json
 import ttkbootstrap as ttk
 from tkinter.font import Font
 from ttkbootstrap.constants import *
-from src.common.filesio import FilesIO
 from src.common.input_validation import validate_number
 
 
@@ -165,7 +164,7 @@ class SettingsFrame(ttk.Frame):
 
         # ------ 读取现有的设置并进行修改 ------ #
         with open(
-            FilesIO.getConfigSavePath("settings/settings.json"), mode="r"
+            "resources/settings/settings.json", mode="r"
         ) as file:
             settings = json.load(file)
             if self.x0_input.get() != '':
@@ -183,7 +182,7 @@ class SettingsFrame(ttk.Frame):
 
         # ------ 将修改后的设置进行保存 ------ #
         with open(
-            FilesIO.getConfigSavePath("settings/settings.json"), mode="w"
+            "resources/settings/settings.json", mode="w"
         ) as files:    
             json.dump(settings, files, indent=4)
 
