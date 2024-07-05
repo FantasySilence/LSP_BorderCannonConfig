@@ -12,6 +12,7 @@ import json
 import ttkbootstrap as ttk
 from tkinter.font import Font
 from ttkbootstrap.constants import *
+from src.common.path_utils import resource_path
 from src.common.input_validation import validate_number
 
 
@@ -164,7 +165,7 @@ class SettingsFrame(ttk.Frame):
 
         # ------ 读取现有的设置并进行修改 ------ #
         with open(
-            "resources/settings/settings.json", mode="r"
+            resource_path("resources/settings/settings.json"), mode="r"
         ) as file:
             settings = json.load(file)
             if self.x0_input.get() != '':
@@ -179,10 +180,12 @@ class SettingsFrame(ttk.Frame):
                 settings["default_y_target"] = self.y_input.get()
             if self.z_input.get() != '':
                 settings["default_z_target"] = self.z_input.get()
+            if self.intended_time.get() != '':
+                settings["default_flying_time"] = self.intended_time.get()
 
         # ------ 将修改后的设置进行保存 ------ #
         with open(
-            "resources/settings/settings.json", mode="w"
+            resource_path("resources/settings/settings.json"), mode="w"
         ) as files:    
             json.dump(settings, files, indent=4)
 

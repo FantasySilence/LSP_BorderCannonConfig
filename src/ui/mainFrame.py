@@ -8,6 +8,7 @@
 # =================================== #
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
+from src.common.path_utils import resource_path
 from src.ui.frames.user_input import InputFrame
 from src.ui.frames.settings import SettingsFrame
 from src.ui.frames.output import ResultTreeViewFrame
@@ -34,7 +35,7 @@ class MainFrame(ttk.Frame):
         # ------ 加载图片 ------ #
         self.images = [
             ttk.PhotoImage(
-                name="logo", file="images/Ender_Pearl.png"
+                name="logo", file=resource_path("images/Ender_Pearl.png")
             ),
         ]
 
@@ -105,7 +106,6 @@ class MainFrame(ttk.Frame):
     @staticmethod
     def _show() -> None:
         root = ttk.Window(title="LSP_BorderConfig v2.0", size=(1000, 730))
-        root.resizable(False, False)
         MainFrame(root)
         root.mainloop()
 
