@@ -9,7 +9,7 @@
 import numpy as np
 from typing import Optional
 from src.common.const import MOTION_PER_TNT
-from src.modules.loadinfo import ConfigInfo
+from src.modules.direction import DirectionJudgment
 
 
 class LoadOneTNTMotion:
@@ -27,7 +27,7 @@ class LoadOneTNTMotion:
         """
 
         # ------ TNT相对于炮口的方向信息 ------ #
-        TNT_direction, direction_code = ConfigInfo.load(x, z)
+        TNT_direction, direction_code = DirectionJudgment.get_direction(x, z)
 
         # ------ 存储单个TNT的动量 ------ #
         TNT_motion = np.zeros((3, 3), dtype=float)

@@ -23,7 +23,7 @@ class CalculateTNTNumber:
             self, x: float, y: float, z: float, t: int,
             # ------ 初始位置 ------ #
             x0: float = DIRECTION_ROTATION["X"],
-            y0: float = 178.34722638929412,
+            y0: float = 256,
             z0: float = DIRECTION_ROTATION["Z"]
     ) -> None:
         
@@ -52,6 +52,9 @@ class CalculateTNTNumber:
             px = (self.x - self.x0)/(100 * (1 - 0.99 ** tick))
             py = (self.y - self.y0 + 3 * tick)/(100 * (1 - 0.99 ** tick) - 3)
             pz = (self.z - self.z0)/(100 * (1 - 0.99 ** tick))
+            # px = (self.x - self.x0)/(99 * (1 - 0.99 ** tick))
+            # py = (self.y - self.y0 + 2.97 * tick)/(99 * (1 - 0.99 ** tick) - 2.97)
+            # pz = (self.z - self.z0)/(99 * (1 - 0.99 ** tick))
 
             # ------ 利用计算得到的动量，求解线性方程组得到所需TNT数量 ------ #
             # 系数矩阵为得到的TNT动量矩阵，右端向量为到达目的地所需动量
@@ -75,6 +78,8 @@ class CalculateTNTNumber:
             final_solution.append(DIRECTION_CODE_TABLE[self.direction_code])
             # final_solution.append(self.direction_code)
             solution_list.append(final_solution)
+
+        # ------ 这里是结果调整 ------ #
         
         # ------ 转换为DataFrame ------ #
         df = pd.DataFrame(

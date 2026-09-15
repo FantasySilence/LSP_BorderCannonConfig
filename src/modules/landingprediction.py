@@ -40,15 +40,19 @@ class LandingPointPrediction:
         tick = 0
 
         # ------ 计算珍珠途径位置 ------ #
-        while y>=128:
-            tick = tick + 1
+        # 1.取消递推，直接算落点
+        while True:
             x = x + x_motion
             y = y + y_motion
             z = z + z_motion
             x_motion = 0.99 * x_motion
-            y_motion = 0.99 * y_motion - 0.03
+            y_motion = 0.99 * (y_motion - 0.03)
             z_motion = 0.99 * z_motion
+            
             PearlLocation.append([tick, x, y, z])
+            tick = tick + 1
+
+            if y < 256: break
 
         # ------ 返回结果 ------ #
         PearlLocationFrame = pd.DataFrame(
